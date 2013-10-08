@@ -21,6 +21,7 @@ if($_POST) {
 	$page_name    = $_POST['page_name'];
 	$page_content = $_POST['page_content'];
 	$page_visible = $_POST['page_visible'];
+	$template = $_POST["template"];
 
 	// Simple Validation
 	if($page_name == '')
@@ -43,7 +44,8 @@ if($_POST) {
 	$p = array(
 			'page_name'    => $page_name,
 			'page_content' => $page_content,
-			'page_visible' => $page_visible
+			'page_visible' => $page_visible,
+			'template' => $template
 		);
 
 	// If there's no errors create the page
@@ -89,6 +91,39 @@ if($_POST) {
 			<select name="page_visible">
 				<option value="true">Yes</option>
 				<option value="false">No</option>
+			</select>
+		</p>
+		<p>
+			Template: 
+			<select name="template">
+				<?php
+				/**
+				* @author Alex Steiner
+				* @copyright Alex Steiner
+				* @link http://alexsteiner.de
+				*/
+				function listTemaplte()
+				{
+					$files = array(); 
+					$dir = scandir("../template/");
+					for ($i=0; $i < count($dir); $i++) { 
+
+						$info = pathinfo("../template/".$dir[$i]);
+						if(@$info['extension'] == "php") {
+							$files[] = $dir[$i];
+						}
+					}
+					return $files;
+				}
+				
+				$files = listTemaplte();
+				for ($i=0; $i < count($files); $i++) { 
+					$name = str_replace(".php", "", $files[$i]);
+					echo  $name;
+					echo "<option value='$name'>$name</option>";
+				}
+
+				?>
 			</select>
 		</p>
 		<input type="submit" value="Submit">

@@ -140,6 +140,7 @@ class Page {
 		$page_name    = trim($p['page_name']);
 		$page_content = $p['page_content'];
 		$page_visible = $p['page_visible'] == "true" ? true : false; // making boolean
+		$template = $p['template'];
 		$page_created = time();
 		$page_file    = PAGES_DIR . str_replace(' ', '_', strtolower($page_name));
 
@@ -151,7 +152,7 @@ class Page {
 						
 						// For the time being "page" will be the only option.
 						// Eventually users will be able to choose from other templates.
-						'template' => 'page',
+						'template' => $template,
 
 						'visible'  => $page_visible
 					)

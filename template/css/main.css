@@ -88,6 +88,12 @@ body {
     background: #1A2934;
 }
 
+.footer-container {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
 .title {
     color: white;
 }

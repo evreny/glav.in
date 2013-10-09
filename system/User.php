@@ -137,8 +137,16 @@ class User {
 		{
 			if($page)
 			{
+				
 				$url = 'login.php?redirect=' . $page;
-				header('Location:' . $url);				
+				
+				if (filter_var($url, FILTER_VALIDATE_URL) !== false)
+				{
+					return false;
+				}
+				
+				header('Location:' . $url);
+				exit();
 			}
 			else
 			{
